@@ -292,56 +292,62 @@ namespace Assignment2_CT_Spring2020
          {
              try
              {
-                /*
-                //Array.Sort(nums3);
-                //Array.Sort(nums4);
-                int m = nums3.Length;
-                int n = nums4.Length;
-                if (m > n)
-                {
-                    int[] tempp = nums3;
-                    nums3 = nums4;
-                    nums4 = tempp;
+                int a = nums1.Length;
+                int b = nums2.Length;
 
-                    int temp = m;
-                    m = n;
-                    n = temp;
+                //Corner case:checks if the array length is zero
+                if ((a == 0) || (b == 0))
+                {
+                    Console.WriteLine("Kindly enter input to proceed further.Exiting the application");
                 }
-
-                // Now that nums3[] is the smaller, Sort smaller array arr1[0..m-1] 
-                Array.Sort(nums3);
-
-                // Search every element of bigger array in smaller array and print the element if found 
-                for (int i = 0; i < n; i++)
+                //declaring new dictionaries for each array and one resultant dictionary
+                var dic1 = new Dictionary<int, int>();
+                var dic2 = new Dictionary<int, int>();
+                var res = new Dictionary<int, int>();
+                //loop based on length of input length
+                for (int i = 0; i < nums1.Length; i++)
                 {
-                    if (binarySearch(nums3, 0, m - 1, nums4[i]) != -1)
-                        Console.Write(nums4[i] + " ");
-                }
-
-
-                // A recursive binary search function. It returns location of x in given array arr[l..r] is present, otherwise -1 
-                static int binarySearch(int[] arr, int l, int r, int x)
-                {
-                    if (r >= l)
+                    //if the dictionary already contains the key,then the value will be increased
+                    if (dic1.ContainsKey(nums1[i]))
                     {
-                        int mid = l + (r - l) / 2;
+                        int value = dic1[nums1[i]];
+                        dic1[nums1[i]] = value + 1;
 
-                        // If the element is present at the middle itself 
-                        if (arr[mid] == x)
-                            return mid;
+                    }
+                    //else,a new entry will be made into the dictionary 
+                    else
+                    {
+                        dic1.Add(nums1[i], 1);
 
-                        // If element is smaller than mid, then it can only be present in left subarray 
-                        if (arr[mid] > x)
-                            return binarySearch(arr, l, mid - 1, x);
-
-                        // Else the element can only be present in right subarray 
-                        return binarySearch(arr, mid + 1, r, x);
                     }
 
-                    // We reach here when element is not present in array 
-                    return -1;
                 }
-                */
+                for (int i = 0; i < nums2.Length; i++)
+                {
+                    if (dic2.ContainsKey(nums2[i]))
+                    {
+                        int value = dic2[nums2[i]];
+                        dic2[nums2[i]] = value + 1;
+
+                    }
+                    else
+                    {
+                        dic2.Add(nums2[i], 1);
+
+                    }
+                }
+                //resultant dictionary stores the values of all intersection between two input dictionaries
+                res = dic1.Keys.Intersect(dic2.Keys)
+                                  .ToDictionary(t => t, t => dic1[t]);
+                Console.WriteLine("Part 2- Intersection of two arrays is: ");
+                foreach (KeyValuePair<int, int> kvp in res)
+
+                {
+
+                    for (int i = 0; i < kvp.Value; i++)
+                        Console.Write((kvp.Key) + " ");
+
+                }
 
             }
             catch
@@ -354,14 +360,67 @@ namespace Assignment2_CT_Spring2020
         //Question 6
          public static bool ContainsDuplicate(char[] arr, int k)
          {
-             try
-             {
-                 //Write your code here;
-             }
-             catch (Exception)
-             {
-                 throw;
-             }
+            try
+            {
+                //initializing  acheck variable to use for conditions
+                int c = -100;
+                //corner case:CHecking if the user has not entered any input
+                if ((arr.Length) == 0)
+                {
+                    Console.WriteLine("Kindly enter input to proceed further.Exiting the application");
+                }
+
+                if ((arr.Length) != 0)
+                {
+                    //declaring new dictionary
+                    Dictionary<char, int> a = new Dictionary<char, int>();
+
+                    for (int i = 0; i < arr.Length; i++)
+                    {
+
+                        //checking if the current array elemnet is alredy present in dictionary
+                        if (a.ContainsKey(arr[i]))
+                        {
+                            //if already present,then fidning the difference between the current array element and previously stored array element
+                            c = (i - a[arr[i]]);
+                            //if this value is greater than predefined k,then prints accordigly
+                            if (c > k)
+                            {
+                                //Console.WriteLine("Output=false");
+                                //break;
+                                return false;
+                            }
+                            else if (c == k)
+                            {
+                                //Console.WriteLine("Output=true");
+                                //break;
+                                return true;
+                            }
+                            else if (c < k)
+                            {
+                                //Console.WriteLine("Output=true");
+                                return true;
+                                //break;
+                            }
+
+
+                        }
+                        else
+                        {
+                            //if not present,the new array element will be added to dictionary
+                            a.Add(arr[i], i);
+
+                        }
+
+
+                    }
+                }
+            }
+
+            catch (Exception)
+            {
+                throw;
+            }
              return default;
          }
 
