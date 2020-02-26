@@ -536,9 +536,9 @@ namespace Assignment2_CT_Spring2020
         {
             try
             {
-                string equationStrong = getInputs();
+                string equationString = getInputs();
 
-                Cryptarithmetic c = new Cryptarithmetic(equationStrong);
+                Cryptarithmetic c = new Cryptarithmetic(equationString); //Declare equationString as an object (c) of type Cryptarithmetic.
                 c.Calc();
             }
             catch (Exception)
@@ -547,7 +547,7 @@ namespace Assignment2_CT_Spring2020
             }
         }
 
-        public static string getInputs()
+        public static string getInputs() //collect inputs from user
         {
             Console.WriteLine("Enter input string 1:");
             string input1 = Console.ReadLine();
@@ -561,7 +561,7 @@ namespace Assignment2_CT_Spring2020
 
         public class Cryptarithmetic
         {
-            string n1, n2, sum;
+            string input1, input2, sum;
             bool invalidString;
             Dictionary<char, int> dict = new Dictionary<char, int>();
             List<char> lettercount = new List<char>();
@@ -572,21 +572,22 @@ namespace Assignment2_CT_Spring2020
                 SetString(str);
                 if (!invalidString)
                 {
-                    SetDict(n1);
-                    SetDict(n2);
+                    SetDict(input1);
+                    SetDict(input2);
                     SetDict(sum);
                 }
             }
 
             void SetString(string str)
             {
-                str = str.ToUpper().Replace(' ', '\0');
+                str = str.ToUpper().Replace(' ', '\0'); //make all characters in string uppercase because different cases will represent the same value
+                                                        //i.e. cool = COOL
                 string[] words = new string[3];
                 try
                 {
                     for (int i = 0, j = 0; i < str.Length; i++)
                     {
-                        if (char.IsLetter(str[i]))
+                        if (char.IsLetter(str[i])) //check if each character in the string is a letter
                         {
                             words[j] += str[i];
                         }
@@ -598,8 +599,8 @@ namespace Assignment2_CT_Spring2020
                                 
                         }
                     }
-                    n1 = words[0];
-                    n2 = words[1];
+                    input1 = words[0];
+                    input2 = words[1];
                     sum = words[2];
                 }
                 catch
@@ -608,18 +609,19 @@ namespace Assignment2_CT_Spring2020
                 }
             }
 
-            public void Calc()
+            public void Calc() //checks if inputs are valid and can be calculated
             {
-                if (dict.Count > 10 || invalidString || calc == null)
+                if (invalidString || calc == null)
+
                 {
                     Console.WriteLine("Invalid String");
                     return;
                 }
 
-                HashSet<int> set = new HashSet<int>();
+                HashSet<int> set = new HashSet<int>(); //declare HashSet set which stores an unordered collection of the unique elements
                 if (Solve(0, set))
                 {
-                    PrintResult();
+                    PrintInputs();
                 }
                 else
                 {
@@ -627,7 +629,7 @@ namespace Assignment2_CT_Spring2020
                 }
             }
 
-            bool Solve(int idx, HashSet<int> set)
+            bool Solve(int idx, HashSet<int> set) //check if solutions exist for given inputs
             {
                 bool found = false;
                 if (idx == dict.Count)
@@ -665,12 +667,12 @@ namespace Assignment2_CT_Spring2020
                 }
             }
 
-            bool Verify()
+            bool Verify() //check if solution is correct
             {
-                int n1 = GetNum(this.n1);
-                int n2 = GetNum(this.n2);
+                int input1 = GetNum(this.input1);
+                int input2 = GetNum(this.input2);
                 int sum = GetNum(this.sum);
-                return calc(n1, n2, sum);
+                return calc(input1, input2, sum);
             }
 
             int GetNum(string str)
@@ -685,12 +687,12 @@ namespace Assignment2_CT_Spring2020
                 return res;
             }
 
-            void PrintResult()
+            void PrintInputs()
             {
                 Console.WriteLine();
-                PrintString(n1);
+                PrintString(input1);
                 Console.WriteLine("+");
-                PrintString(n2);
+                PrintString(input2);
                 Console.WriteLine("=");
                 PrintString(sum);
             }
