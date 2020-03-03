@@ -15,17 +15,7 @@ namespace Assignment2_CT_Spring2020
             int target = 9;
             int[] r = TargetRange(l1, target);
 
-            //below prints if the target elements is same as first array element
-            if (l1[0] == target)
-                Console.Write(0 + " ");
-            //below for loop checks the condition untill last array element
-            for (int m = 0; m < r.Length; m++)
-            {
-                //if the array elemts is overwritten with any other value,then only the below condition is true
-                if ((r[m]) != 0)
-
-                    Console.Write(r[m] + " ");
-            }
+            Console.WriteLine();
 
             Console.WriteLine("Question 2");
             string s = "University of South Florida";
@@ -51,8 +41,6 @@ namespace Assignment2_CT_Spring2020
             Console.WriteLine("\n");
             Console.WriteLine("Question 5-Part 2");
             int[] intersect2 = Intersect2(nums1, nums2);
-            Console.WriteLine("Part 2- Intersection of two arrays is: ");
-            DisplayArray(intersect2);
             Console.WriteLine("\n");
 
             Console.WriteLine("Question 6"); 
@@ -87,8 +75,13 @@ namespace Assignment2_CT_Spring2020
         //Question 1
 
 
-    public static int[] TargetRange(int[] l1, int t)
+        public static int[] TargetRange(int[] l1, int t)
         {
+            //below prints if the target elements is same as first array element
+            if (l1[0] == t)
+                Console.Write(0 + " ");
+
+
             //initializing below value which helps to do return output based on its value(code followed..)
             int a = 0;
             //initialing the array list with 100 elemnents
@@ -132,8 +125,20 @@ namespace Assignment2_CT_Spring2020
 
             //return new int[] { };--given in asgn-recheck
 
+            //below for loop checks the condition untill last array element
+            for (int m = 0; m < r.Length; m++)
+            {
+                //if the array elemts is overwritten with any other value,then only the below condition is true
+                if ((r[m]) != 0)
+
+                    Console.Write(r[m] + " ");
+            }
+
             return r;
+
+
         }
+
 
         //Question 2
         public static string StringReverse(string s)
@@ -301,11 +306,11 @@ namespace Assignment2_CT_Spring2020
              return new int[] { };
          }
 
-        //Question 5 Part 2
-         public static int[] Intersect2(int[] nums1, int[] nums2)
-         {
-             try
-             {
+        //Question 5 - Part 2
+        public static int[] Intersect2(int[] nums1, int[] nums2)
+        {
+            try
+            {
                 int a = nums1.Length;
                 int b = nums2.Length;
 
@@ -363,17 +368,18 @@ namespace Assignment2_CT_Spring2020
 
                 }
 
+
             }
             catch
-             {
-                 throw;
-             }
-             return new int[] { };
-         }
+            {
+                Console.WriteLine("Exception occured during intersect execution");
+            }
+            return new int[] { };
+        }
 
 
         //Question 6
-        
+
         public static bool ContainsDuplicate(char[] arr, int k)
         {
             try
