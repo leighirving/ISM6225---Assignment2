@@ -10,116 +10,130 @@ namespace Assignment2_CT_Spring2020
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Question 1"); 
-            int[] l1 = new int[] { 5, 6, 6, 9, 9, 12 }; 
-            int target = 9; 
-            int[] r = TargetRange(l1, target);             
+            Console.WriteLine("Question 1");
+            int[] l1 = new int[] { 5, 6, 6, 9, 9, 12 };
+            int target = 9;
+            int[] r = TargetRange(l1, target);
 
-            Console.WriteLine("Question 2"); 
-            string s = "University of South Florida"; 
-            string rs = StringReverse(s); 
+            //below prints if the target elements is same as first array element
+            if (l1[0] == target)
+                Console.Write(0 + " ");
+            //below for loop checks the condition untill last array element
+            for (int m = 0; m < r.Length; m++)
+            {
+                //if the array elemts is overwritten with any other value,then only the below condition is true
+                if ((r[m]) != 0)
+
+                    Console.Write(r[m] + " ");
+            }
+
+            Console.WriteLine("Question 2");
+            string s = "University of South Florida";
+            string rs = StringReverse(s);
             Console.WriteLine(rs);
 
-            Console.WriteLine("Question 3"); 
-            int[] l2 = new int[] { 2, 2, 3, 5, 6 }; 
-            int sum = MinimumSum(l2); 
+            Console.WriteLine("Question 3");
+            int[] l2 = new int[] { 2, 2, 3, 5, 6 };
+            int sum = MinimumSum(l2);
             Console.WriteLine(sum);
 
-            Console.WriteLine("Question 4"); 
-            string s2 = "Dell"; 
-            string sortedString = FreqSort(s2); 
+            Console.WriteLine("Question 4");
+            string s2 = "Dell";
+            string sortedString = FreqSort(s2);
             Console.WriteLine(sortedString);
 
-            Console.WriteLine("Question 5-Part 1"); 
-            int[] nums1 = { 1, 2, 2, 1 }; 
-            int[] nums2 = { 2, 2 }; 
-            int[] intersect1 = Intersect1(nums1, nums2); 
-            Console.WriteLine("Part 1- Intersection of two arrays is: "); 
-            DisplayArray(intersect1); 
-            Console.WriteLine("\n"); 
-            Console.WriteLine("Question 5-Part 2"); 
-            int[] intersect2 = Intersect2(nums1, nums2); 
-            Console.WriteLine("Part 2- Intersection of two arrays is: "); 
-            DisplayArray(intersect2); 
+            Console.WriteLine("Question 5-Part 1");
+            int[] nums1 = { 1, 2, 2, 1 };
+            int[] nums2 = { 2, 2 };
+            int[] intersect1 = Intersect1(nums1, nums2);
+            Console.WriteLine("Part 1- Intersection of two arrays is: ");
+            DisplayArray(intersect1);
+            Console.WriteLine("\n");
+            Console.WriteLine("Question 5-Part 2");
+            int[] intersect2 = Intersect2(nums1, nums2);
+            Console.WriteLine("Part 2- Intersection of two arrays is: ");
+            DisplayArray(intersect2);
             Console.WriteLine("\n");
 
             Console.WriteLine("Question 6"); 
-            char[] arr = new char[] { 'a', 'g', 'h', 'a' }; 
+            char[] arr = new char[] { 'a', 'g','h', 'a'}; 
             int k = 3; 
             Console.WriteLine(ContainsDuplicate(arr, k));
 
             Console.WriteLine("Question 7");
             int rodLength = 6;
-            int priceProduct = GoldRod(rodLength); 
+            int priceProduct = GoldRod(rodLength);
             Console.WriteLine(priceProduct);
-            
-            
-            Console.WriteLine("Question 8"); 
-            string[] userDict = new string[] { "rocky", "usf", "hello", "apple" }; 
+
+
+            Console.WriteLine("Question 8");
+            string[] userDict = new string[] { "rocky", "usf", "hello", "apple" };
             string keyword = "";
             Console.WriteLine(DictSearch(userDict, keyword));
-            
+
             Console.WriteLine("Question 9");
             SolvePuzzle();
 
         }
 
         public static void DisplayArray(int[] a)
-         {
-             foreach (int n in a)
-             {
-                 Console.Write(n + " ");
-             }
-         }
+        {
+            foreach (int n in a)
+            {
+                Console.Write(n + " ");
+            }
+        }
 
         //Question 1
-        public static int[] TargetRange(int[] l1, int t)
-         {
+
+
+    public static int[] TargetRange(int[] l1, int t)
+        {
             //initializing below value which helps to do return output based on its value(code followed..)
             int a = 0;
-             //initialing the array list with 100 elemnents
-             //not using arraylist as the datatype declared is only int
-             int[] r = new int[100];
-             try
-             {
-                 int j = 0;
+            //initialing the array list with 100 elemnents
+            //not using arraylist as the datatype declared is only int
+            int[] r = new int[100];
+            try
+            {
+                int j = 0;
 
-                 //below for loop checks the condition untill last array element
+                //below for loop checks the condition untill last array element
 
-                 for (int i = 0; i < l1.Length; i++)
-                 {
-                 //the result array will be initiated only there the target varaible is equal to the respective array elment
-                 //the below condition keeps checking for all array elements
-                     if (l1[i] == t)
-                     {
-                     //the below a value helps in printing the output
-                             a = 1;
-                            //the below result array keeps adding the number of array elemnt it each matches with the target
-                         r[j] = Convert.ToInt32(i);
+                for (int i = 0; i < l1.Length; i++)
+                {
+                    //the result array will be initiated only there the target varaible is equal to the respective array elment
+                    //the below condition keeps checking for all array elements
+                    if (l1[i] == t)
+                    {
+                        //the below a value helps in printing the output
+                        a = 1;
+                        //the below result array keeps adding the number of array elemnt it each matches with the target
+                        r[j] = Convert.ToInt32(i);
 
-                     }
-                     //the below is incremented for the result array positioning
-                     j++;
+                    }
+                    //the below is incremented for the result array positioning
+                    j++;
 
-                 }
-                 //if the above if loop is not executed,then default output shown below will be excuted
-                 if (a == 0)
-                 {
-                     Console.WriteLine("[-1,-1]");
-                 }
+                }
+                //if the above if loop is not executed,then default output shown below will be excuted
+                if (a == 0)
+                {
+                    Console.WriteLine("[-1,-1]");
+                }
 
 
-             }
-             catch (Exception)
-             {
+            }
+            catch (Exception)
+            {
 
-                 Console.WriteLine("Kindly recheck your inputs before proceeding");
-             }
+                Console.WriteLine("Kindly recheck your inputs before proceeding");
+            }
 
-             //return new int[] { };--given in asgn-recheck
+            //return new int[] { };--given in asgn-recheck
 
-             return r;
-         }
+            return r;
+        }
 
         //Question 2
         public static string StringReverse(string s)
@@ -357,75 +371,29 @@ namespace Assignment2_CT_Spring2020
              return new int[] { };
          }
 
+
         //Question 6
-         public static bool ContainsDuplicate(char[] arr, int k)
-         {
+        
+        public static bool ContainsDuplicate(char[] arr, int k)
+        {
             try
             {
-                //initializing  acheck variable to use for conditions
-                int c = -100;
-                //corner case:CHecking if the user has not entered any input
-                if ((arr.Length) == 0)
-                {
-                    Console.WriteLine("Kindly enter input to proceed further.Exiting the application");
-                }
-
-                if ((arr.Length) != 0)
-                {
-                    //declaring new dictionary
-                    Dictionary<char, int> a = new Dictionary<char, int>();
-
-                    for (int i = 0; i < arr.Length; i++)
-                    {
-
-                        //checking if the current array elemnet is alredy present in dictionary
-                        if (a.ContainsKey(arr[i]))
-                        {
-                            //if already present,then fidning the difference between the current array element and previously stored array element
-                            c = (i - a[arr[i]]);
-                            //if this value is greater than predefined k,then prints accordigly
-                            if (c > k)
-                            {
-                                //Console.WriteLine("Output=false");
-                                //break;
-                                return false;
-                            }
-                            else if (c == k)
-                            {
-                                //Console.WriteLine("Output=true");
-                                //break;
-                                return true;
-                            }
-                            else if (c < k)
-                            {
-                                //Console.WriteLine("Output=true");
-                                return true;
-                                //break;
-                            }
-
-
-                        }
-                        else
-                        {
-                            //if not present,the new array element will be added to dictionary
-                            a.Add(arr[i], i);
-
-                        }
-
-
-                    }
-                }
+                arr.Take(k + 1).ToDictionary(key => key, value => value); 
             }
-
-            catch (Exception)
+            catch (Exception) 
             {
-                throw;
+                return true; //returns true if key already exists in dictionary, i.e. there is a duplicate
             }
-             return default;
-         }
+            if(arr.Length > k + 1)
+            {
+                return ContainsDuplicate(arr.Skip(k + 1).ToArray(), k); 
+            }
 
-  
-    
+            return false;
+        }
+        
+       
+
 
 
         //Question 7
@@ -595,8 +563,10 @@ namespace Assignment2_CT_Spring2020
                         {
                             j++;
                             
-                            calc = (n1, n2, s) => n1 + n2 == s && dict[sum[0]] != 0;
-                                
+                            calc = (n1, n2, s) => n1 + n2 == s && dict[sum[0]] != 0;  
+                            
+                            //validate that the values of  string 1 and 2 are valid for the given input and that the left most digit for sum is not equal to 0
+
                         }
                     }
                     input1 = words[0];
@@ -675,14 +645,14 @@ namespace Assignment2_CT_Spring2020
                 return calc(input1, input2, sum);
             }
 
-            int GetNum(string str)
+            int GetNum(string str) 
             {
                 int pow = 1;
                 int res = 0;
                 for (int i = str.Length - 1; i >= 0; i--)
                 {
-                    res += dict[str[i]] * pow;
-                    pow *= 10;
+                    res += dict[str[i]] * pow; 
+                    pow *= 10;                      
                 }
                 return res;
             }
